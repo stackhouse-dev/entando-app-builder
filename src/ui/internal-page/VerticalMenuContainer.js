@@ -226,6 +226,11 @@ const EntandoMenu = ({
 
   return (
     <div className="safari-menu-fix VerticalMenuContainer">
+      {/* {(openPath === null || openPath === '/') && (
+      <Button className="VerticalMenu__expand-collapse-btn" onClick={handleExpandCollapse}>
+        <Icon name={`angle-double-${collapsed ? 'right' : 'left'}`} />
+      </Button>
+    )} */}
       <VerticalNav
         blurDisabled
         dynamicBodyClasses
@@ -247,6 +252,14 @@ const EntandoMenu = ({
         navCollapsed={collapsed}
       >
         {getHeader(onStartTutorial)}
+        <Item
+          id="menu-toggle"
+          className="VerticalMenuContainer_Toggle"
+          onClick={handleExpandCollapse}
+          iconClass={`fa fa-angle-double-${collapsed ? 'right' : 'left'}`}
+          {...(collapsed ? { title: intl.formatMessage({ id: 'menu.toggle', defaultMessage: 'Toggle Menu' }) } : {})}
+        />
+
         <Item
           id="menu-dashboard"
           onClick={() => history.push(ROUTE_DASHBOARD)}
@@ -395,7 +408,8 @@ const EntandoMenu = ({
               id="menu-configuration"
               title={intl.formatMessage({ id: 'menu.settings', defaultMessage: 'Administration' })}
               onClick={() => { }}
-              iconClass="fa fa-cogs"
+              iconClass="VerticalMenuContainer_Icon Settings"
+
             >
               <SecondaryItem
                 id="menu-databases"
@@ -428,15 +442,10 @@ const EntandoMenu = ({
         {/* add container to render MFE on side menu here */}
       </VerticalNav>
       {(openPath !== null && openPath !== '/') && (
-        <Button className="VerticalMenu__secondary-collapse-btn" onClick={handleSecondaryCollapseBtnClick}>
-          <Icon name="angle-double-left" />
-        </Button>
-      )}
-      {(openPath === null || openPath === '/') && (
-        <Button className="VerticalMenu__expand-collapse-btn" onClick={handleExpandCollapse}>
-          <Icon name={`angle-double-${collapsed ? 'right' : 'left'}`} />
-        </Button>
-      )}
+      <Button className="VerticalMenu__secondary-collapse-btn" onClick={handleSecondaryCollapseBtnClick}>
+        <Icon name="angle-double-left" />
+      </Button>
+    )}
     </div>);
 };
 
